@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>HackerNews Search</title>
         <meta
           name="HackerNews Search"
           content="A GUI for searching hackernews blogs using their API's"

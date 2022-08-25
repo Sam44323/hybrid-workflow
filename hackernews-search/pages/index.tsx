@@ -14,9 +14,11 @@ import {
 import Head from "next/head";
 
 import axios from "../src/utils/axios";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const toast = useToast();
+  const router = useRouter();
   const [searchInput, setSearchInput] = React.useState<string>("");
   const [searchedData, setSearchedData] = React.useState<boolean>(false);
   const [hackernewsData, setHackerNewsData] = React.useState<any[]>([]);
@@ -117,7 +119,11 @@ const Home: NextPage = () => {
               const { author } = item._highlightResult;
               console.log(item);
               return (
-                <div key={index} className={styles.Card}>
+                <div
+                  key={index}
+                  className={styles.Card}
+                  onClick={() => router.push("/article/" + item.objectID)}
+                >
                   <h1>{item.title}</h1>
                   <section className={styles.SubData}>
                     <h2>Author: {author.value}</h2>

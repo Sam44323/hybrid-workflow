@@ -8,6 +8,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Spinner,
   useToast,
 } from "@chakra-ui/react";
 import Head from "next/head";
@@ -38,6 +39,7 @@ const Home: NextPage = () => {
   }, [toast]);
 
   const handleSearch = async () => {
+    toast.closeAll();
     if (!searchInput.length) {
       toast({
         status: "error",
@@ -47,9 +49,17 @@ const Home: NextPage = () => {
       return;
     }
     try {
+      toast({
+        status: "success",
+        position: "top",
+        title: "Loading the search results...",
+        icon: <Spinner size={"sm"} />,
+        duration: null,
+      });
       const { data } = await axios.get(`/search?query=${searchInput}`);
       setSearchedData(true);
-      setHackerNewsData(data);
+      setHackerNewsData(data.hits);
+      toast.closeAll();
     } catch (err) {
       console.log(err);
       toast({
@@ -75,7 +85,12 @@ const Home: NextPage = () => {
         <section className={styles.InputContainer}>
           <InputGroup>
             <InputLeftElement pointerEvents="none" children={<BsSearch />} />
-            <Input type="text" placeholder="news title" value={searchInput} />
+            <Input
+              type="text"
+              placeholder="news title"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
           </InputGroup>
           <Button
             className={styles.Button}
@@ -99,11 +114,10 @@ const Home: NextPage = () => {
         <section className={styles.ResultsContainer}>
           {hackernewsData.length > 0 &&
             hackernewsData.map((item: any, index: number) => {
-              const { author, title } = item._highlightResult;
-              console.log(item);
+              const { author } = item._highlightResult;
               return (
                 <div key={index} className={styles.Card}>
-                  <h1>{title.value}</h1>
+                  <h1>{item.title}</h1>
                   <section className={styles.SubData}>
                     <h2>Author: {author.value}</h2>
                     <h2>Points: {item.points}</h2>

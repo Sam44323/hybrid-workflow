@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.HomeContainer}>
-        <h1>HackerNews Search</h1>
+        <h1>Hackernews Search</h1>
       </main>
     </>
   );

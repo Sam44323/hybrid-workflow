@@ -4,19 +4,18 @@ import { BsSearch } from "react-icons/bs";
 import styles from "./Home.module.scss";
 import type { NextPage } from "next";
 import {
-  Badge,
-  Box,
   Button,
-  Grid,
   Input,
   InputGroup,
   InputLeftElement,
+  useToast,
 } from "@chakra-ui/react";
 import Head from "next/head";
 
 import axios from "../src/utils/axios";
 
 const Home: NextPage = () => {
+  const toast = useToast();
   const [searchInput, setSearchInput] = React.useState<string>("");
   const [searchedData, setSearchedData] = React.useState<boolean>(false);
   const [hackernewsData, setHackerNewsData] = React.useState<any[]>([]);
@@ -28,6 +27,20 @@ const Home: NextPage = () => {
     };
     fetchData();
   }, []);
+
+  const handleSearch = async () => {
+    if (!searchInput.length) {
+      toast({
+        status: "error",
+        position: "top",
+        title: "Please enter a search term",
+      });
+      return;
+    }
+    const { data } = await axios.get(`/search?query=${searchInput}`);
+    setSearchedData(true);
+    setHackerNewsData(data.hits.slice(0, 10));
+  };
 
   return (
     <>
@@ -44,9 +57,14 @@ const Home: NextPage = () => {
         <section className={styles.InputContainer}>
           <InputGroup>
             <InputLeftElement pointerEvents="none" children={<BsSearch />} />
-            <Input type="text" placeholder="news title" />
+            <Input type="text" placeholder="news title" value={searchInput} />
           </InputGroup>
-          <Button className={styles.Button} colorScheme="green" variant="solid">
+          <Button
+            className={styles.Button}
+            colorScheme="green"
+            variant="solid"
+            onClick={handleSearch}
+          >
             Search
           </Button>
         </section>

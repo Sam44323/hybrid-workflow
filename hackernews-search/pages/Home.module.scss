@@ -32,11 +32,16 @@
       max-width: 380px;
       padding: 10px 0px;
       border-radius: 10px;
-      margin: 0 auto;
+      margin: 10px auto;
       background-color: black;
       color: #fff;
       padding-bottom: 0px;
       position: relative;
+      transition: transform 0.3s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
       h1 {
         font-size: 19px;
         margin: 0;

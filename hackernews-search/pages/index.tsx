@@ -115,6 +115,7 @@ const Home: NextPage = () => {
           {hackernewsData.length > 0 &&
             hackernewsData.map((item: any, index: number) => {
               const { author } = item._highlightResult;
+              console.log(item);
               return (
                 <div key={index} className={styles.Card}>
                   <h1>{item.title}</h1>

@@ -22,11 +22,20 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("/search?tags=front_page");
-      setHackerNewsData(data.hits.slice(0, 10));
+      try {
+        const { data } = await axios.get("/search?tags=front_page");
+        setHackerNewsData(data.hits.slice(0, 10));
+      } catch (err) {
+        console.log(err);
+        toast({
+          status: "error",
+          position: "top",
+          title: "Error while loading data",
+        });
+      }
     };
     fetchData();
-  }, []);
+  }, [toast]);
 
   const handleSearch = async () => {
     if (!searchInput.length) {
@@ -37,9 +46,18 @@ const Home: NextPage = () => {
       });
       return;
     }
-    const { data } = await axios.get(`/search?query=${searchInput}`);
-    setSearchedData(true);
-    setHackerNewsData(data.hits.slice(0, 10));
+    try {
+      const { data } = await axios.get(`/search?query=${searchInput}`);
+      setSearchedData(true);
+      setHackerNewsData(data);
+    } catch (err) {
+      console.log(err);
+      toast({
+        status: "error",
+        position: "top",
+        title: "Error while searching for the news",
+      });
+    }
   };
 
   return (

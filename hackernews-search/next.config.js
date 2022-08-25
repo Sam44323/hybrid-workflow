@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    hostname: "*",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

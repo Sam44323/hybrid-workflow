@@ -26,8 +26,16 @@ const Home: NextPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        toast({
+          status: "success",
+          position: "top",
+          title: "Loading recently published articles",
+          icon: <Spinner size={"sm"} />,
+          duration: null,
+        });
         const { data } = await axios.get("/search?tags=front_page");
         setHackerNewsData(data.hits.slice(0, 10));
+        toast.closeAll();
       } catch (err) {
         console.log(err);
         toast({

@@ -18,6 +18,7 @@ import axios from "../src/utils/axios";
 
 const Home: NextPage = () => {
   const [searchInput, setSearchInput] = React.useState<string>("");
+  const [searchedData, setSearchedData] = React.useState<boolean>(false);
   const [hackernewsData, setHackerNewsData] = React.useState<any[]>([]);
 
   useEffect(() => {
@@ -49,6 +50,14 @@ const Home: NextPage = () => {
             Search
           </Button>
         </section>
+        {!searchedData && <p>Recently Published Articles</p>}
+        {searchedData && hackernewsData.length > 0 ? (
+          <p>Search Results</p>
+        ) : searchedData && hackernewsData.length === 0 ? (
+          <p>No results found!</p>
+        ) : (
+          <></>
+        )}
         <section className={styles.ResultsContainer}>
           {hackernewsData.length > 0 &&
             hackernewsData.map((item: any, index: number) => {

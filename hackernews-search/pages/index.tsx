@@ -1,6 +1,5 @@
 /* eslint-disable react/no-children-prop */
 import React, { useEffect } from "react";
-import Image from "next/image";
 import { BsSearch } from "react-icons/bs";
 import styles from "./Home.module.scss";
 import type { NextPage } from "next";
@@ -8,14 +7,10 @@ import {
   Badge,
   Box,
   Button,
-  Flex,
   Grid,
-  GridItem,
   Input,
   InputGroup,
   InputLeftElement,
-  Spacer,
-  Stack,
 } from "@chakra-ui/react";
 import Head from "next/head";
 
@@ -28,7 +23,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("/search?tags=front_page");
-      setHackerNewsData(data.hits);
+      setHackerNewsData(data.hits.slice(0, 10));
     };
     fetchData();
   }, []);
@@ -55,42 +50,20 @@ const Home: NextPage = () => {
           </Button>
         </section>
         <section className={styles.ResultsContainer}>
-          <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-            {hackernewsData.length > 0 &&
-              hackernewsData.map((item: any, index: number) => {
-                console.log(item);
-                return (
-                  <Box w="300px" rounded="20px" overflow="hidden" key={index}>
-                    <Image
-                      src={`/api/imagefetcher?url=${encodeURIComponent(
-                        "https://media.geeksforgeeks.org/wp-content/uploads/20210727094649/img1.jpg"
-                      )}`}
-                      alt="Card Image"
-                      height={300}
-                      width={300}
-                    />
-                    <Box p={5}>
-                      <Stack align="center">
-                        <Badge
-                          variant="solid"
-                          colorScheme="green"
-                          rounded="full"
-                          px={2}
-                        >
-                          GeeksForGeeks
-                        </Badge>
-                      </Stack>
-                      <Flex>
-                        <Spacer />
-                        <Button variant="solid" colorScheme="green" size="sm">
-                          Learn More
-                        </Button>
-                      </Flex>
-                    </Box>
-                  </Box>
-                );
-              })}
-          </Grid>
+          {hackernewsData.length > 0 &&
+            hackernewsData.map((item: any, index: number) => {
+              const { author, title } = item._highlightResult;
+              console.log(item);
+              return (
+                <div key={index} className={styles.Card}>
+                  <h1>{title.value}</h1>
+                  <section className={styles.SubData}>
+                    <h2>Author: {author.value}</h2>
+                    <h2>Points: {item.points}</h2>
+                  </section>
+                </div>
+              );
+            })}
         </section>
       </main>
     </>

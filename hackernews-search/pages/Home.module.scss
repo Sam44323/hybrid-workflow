@@ -3,7 +3,6 @@
   h1 {
     text-align: center;
     margin: 0;
-    background-color: salmon;
     max-width: 400px;
     margin: 0 auto;
     padding: 10px 5px;
@@ -18,6 +17,42 @@
     margin-top: 30px;
     .Button {
       margin-left: 15px;
+    }
+  }
+
+  .ResultsContainer {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    .Card {
+      min-width: 380px;
+      max-width: 380px;
+      padding: 10px 0px;
+      border-radius: 10px;
+      margin: 0 auto;
+      background-color: black;
+      color: #fff;
+      padding-bottom: 0px;
+      position: relative;
+      h1 {
+        font-size: 19px;
+        margin: 0;
+        padding: 70px 5px;
+      }
+      .SubData {
+        position: absolute;
+        background-color: salmon;
+        font-weight: bold;
+        display: flex;
+        border-radius: 0px 0px 10px 10px;
+        width: 100%;
+        padding: 4px 5px;
+        justify-content: space-between;
+        bottom: 0;
+      }
     }
   }
 }

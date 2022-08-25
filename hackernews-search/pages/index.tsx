@@ -26,6 +26,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        toast.closeAll();
         toast({
           status: "success",
           position: "top",
@@ -46,7 +47,7 @@ const Home: NextPage = () => {
       }
     };
     fetchData();
-  }, [toast]);
+  }, []);
 
   const handleSearch = async () => {
     toast.closeAll();

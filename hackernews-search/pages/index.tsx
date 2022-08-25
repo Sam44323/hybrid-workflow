@@ -50,11 +50,13 @@ const Home: NextPage = () => {
             Search
           </Button>
         </section>
-        {!searchedData && <p>Recently Published Articles</p>}
+        {!searchedData && (
+          <p className={styles.MessageText}>Recently Published Articles</p>
+        )}
         {searchedData && hackernewsData.length > 0 ? (
-          <p>Search Results</p>
+          <p className={styles.MessageText}>Search Results</p>
         ) : searchedData && hackernewsData.length === 0 ? (
-          <p>No results found!</p>
+          <p className={styles.MessageText}>No results found!</p>
         ) : (
           <></>
         )}

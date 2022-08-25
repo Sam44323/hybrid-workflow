@@ -1,9 +1,10 @@
+import styles from "./Home.module.scss";
 import type { NextPage } from "next";
 import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>HackerNews Search</title>
         <meta
@@ -12,7 +13,10 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-    </div>
+      <main className={styles.HomeContainer}>
+        <h1>HackerNews Search</h1>
+      </main>
+    </>
   );
 };
 

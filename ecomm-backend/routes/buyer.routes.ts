@@ -10,7 +10,7 @@ import {
 const buyerRouter = Router()
 
 buyerRouter.get('/list-of-sellers', authMiddleware, getSellersList)
-buyerRouter.post(
+buyerRouter.get(
   '/seller-catalog/:seller_id',
   authMiddleware,
   getSellerCatalogue

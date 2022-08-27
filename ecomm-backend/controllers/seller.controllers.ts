@@ -39,6 +39,20 @@ const createCatalog = async (req: Request, res: Response) => {
   }
 }
 
-const getOrders = async (req: Request, res: Response) => {}
+const getOrders = async (req: Request, res: Response) => {
+  const { sellerId } = req.query
+  if (!sellerId) {
+    return res.status(400).json({ message: 'Payload incomplete...' })
+  }
+  try {
+    const orders = await OrdersModel.find({
+      seller: new ObjectId(sellerId.toString())
+    })
+    return res.status(200).json({ orders })
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: err.message })
+  }
+}
 
 export { createCatalog, getOrders }

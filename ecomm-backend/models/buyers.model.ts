@@ -1,5 +1,4 @@
 import { prop, getModelForClass } from '@typegoose/typegoose'
-import mongoose from 'mongoose'
 
 class Buyers {
   @prop({ required: true, type: String })

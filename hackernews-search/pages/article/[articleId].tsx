@@ -1,12 +1,28 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import { Spinner, useToast } from "@chakra-ui/react";
 
 import styles from "./Article.module.scss";
 import axios from "../../src/utils/axios";
 
-const Article: NextPage = (props) => {
+const Article: NextPage = (props: any) => {
+  const toast = useToast();
+
   console.log(props);
+  React.useEffect(() => {
+    if (props.articleId) {
+      toast.closeAll();
+    } else {
+      toast({
+        status: "success",
+        position: "top",
+        title: "Loading the article...",
+        icon: <Spinner size={"sm"} />,
+        duration: null,
+      });
+    }
+  }, [props, toast]);
   return (
     <>
       <Head>
@@ -17,6 +33,7 @@ const Article: NextPage = (props) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className={styles.ArticleContainer}></div>
     </>
   );
 };

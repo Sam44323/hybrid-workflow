@@ -2,18 +2,15 @@ import { Request, Response } from 'express'
 import ProductModel from '../models/products.model'
 import OrdersModel from '../models/orders.model'
 import SellerModel from '../models/sellers.model'
-import mongoose from 'mongoose'
-import { ObjectId, ObjectID } from 'bson'
+import { ObjectId } from 'mongodb'
 
 const createCatalog = async (req: Request, res: Response) => {
   const { sellerId, data } = req.body
   if (!sellerId || data.length === 0) {
-    console.log(sellerId)
-    console.log(data)
     return res.status(400).json({ message: 'Payload incomplete...' })
   }
   try {
-    const seller = await SellerModel.findById(new ObjectID(sellerId))
+    const seller = await SellerModel.findById(new ObjectId(sellerId))
 
     if (!seller) {
       return res.status(400).json({ message: 'Seller not found' })
@@ -28,15 +25,12 @@ const createCatalog = async (req: Request, res: Response) => {
         }
         const prod = await ProductModel.create(product)
         prodIds.push(prod._id)
-        console.log('Prod: ', prod._id)
       })
     )
 
-    console.log('ProdIds: ', prodIds)
-
     seller.catalogue = [...seller.catalogue, ...prodIds]
 
-    await SellerModel.findOneAndUpdate({ _id: new ObjectID(sellerId) }, seller)
+    await SellerModel.findOneAndUpdate({ _id: new ObjectId(sellerId) }, seller)
 
     return res.status(201).json({ message: 'Catalogue created...' })
   } catch (err) {

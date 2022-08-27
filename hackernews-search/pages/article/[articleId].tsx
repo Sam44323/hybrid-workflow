@@ -35,12 +35,18 @@ const Article: NextPage = (props: any) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div
-        className={styles.ArticleContainer}
-        style={{
-          display: hasData ? "block" : "none",
-        }}
-      ></div>
+      {hasData && (
+        <div className={styles.ArticleContainer}>
+          <section className={styles.TopData}>
+            <h1>{props.data.title}</h1>
+            <div className={styles.SubDataContainer}>
+              <p>Points: {props.data.points}</p>
+              <p>Author: {props.data.author}</p>
+            </div>
+          </section>
+          <section className={styles.CommentsSection}></section>
+        </div>
+      )}
     </>
   );
 };

@@ -2,9 +2,45 @@ import React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { Spinner, useToast } from "@chakra-ui/react";
+import { Interweave } from "interweave";
 
 import styles from "./Article.module.scss";
 import axios from "../../src/utils/axios";
+
+const Comments: React.FC<{
+  text: string;
+  author: string;
+  children: {
+    text: string;
+    author: string;
+    children: any[];
+  }[];
+}> = (props) => {
+  const [comments, setComments] = React.useState<boolean>(false);
+
+  console.log(props);
+
+  return props.text ? (
+    <div className={styles.Comments}>
+      <Interweave
+        content={props.text && props.text.substring(3, props.text.length - 4)}
+      />
+      {props.children.length > 0 && (
+        <p
+          onClick={() => setComments((prev) => !prev)}
+          className={styles.ButtonShow}
+        >
+          Show nested thread
+        </p>
+      )}
+      {props.children.length > 0 &&
+        comments &&
+        props.children.map((item, index) => <Comments {...item} key={index} />)}
+    </div>
+  ) : (
+    <></>
+  );
+};
 
 const Article: NextPage = (props: any) => {
   const toast = useToast();
@@ -46,6 +82,14 @@ const Article: NextPage = (props: any) => {
           </section>
           <section className={styles.CommentsSection}>
             <h1>Comments for this post</h1>
+            {props.data.children.map(
+              (
+                item: { text: string; author: string; children: [] },
+                index: number
+              ) => (
+                <Comments {...item} key={index} />
+              )
+            )}
           </section>
         </div>
       )}

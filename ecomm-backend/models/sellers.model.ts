@@ -1,5 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose'
 import mongoose from 'mongoose'
+import ProductModel from './products.model'
 
 class Sellers {
   @prop({ required: true, type: String })
@@ -8,7 +9,7 @@ class Sellers {
   @prop({ required: true, type: String })
   email: string
 
-  @prop({ type: Array<mongoose.Schema.Types.ObjectId>, default: [] })
+  @prop({ type: Array<mongoose.Schema.Types.ObjectId>, default: [], ref: ProductModel })
   catalogue: mongoose.Schema.Types.ObjectId[]
 }
 

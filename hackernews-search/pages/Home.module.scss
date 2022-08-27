@@ -35,6 +35,8 @@
     grid-gap: 10px;
     flex-wrap: wrap;
     margin-top: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
     @media (max-width: 1200px) {
       display: flex;
       flex-wrap: wrap;

@@ -1,10 +1,12 @@
 import React from "react";
-import { NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import styles from "./Article.module.scss";
+import axios from "../../src/utils/axios";
 import Head from "next/head";
 
-const Article: NextPage = () => {
+const Article: NextPage = (props) => {
+  console.log(props);
   return (
     <>
       <Head>
@@ -17,6 +19,21 @@ const Article: NextPage = () => {
       </Head>
     </>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{ params: { articleId: "1" } }],
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {
+      articleId: context.params!.articleId,
+    },
+  };
 };
 
 export default Article;

@@ -44,7 +44,9 @@ const Article: NextPage = (props: any) => {
               <p>Author: {props.data.author}</p>
             </div>
           </section>
-          <section className={styles.CommentsSection}></section>
+          <section className={styles.CommentsSection}>
+            <h1>Comments for this post</h1>
+          </section>
         </div>
       )}
     </>

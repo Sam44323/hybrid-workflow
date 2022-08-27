@@ -47,7 +47,7 @@ const Home: NextPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [toast]);
 
   const handleSearch = async () => {
     toast.closeAll();

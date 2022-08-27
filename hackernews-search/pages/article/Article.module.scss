@@ -3,8 +3,7 @@
     padding-top: 30px;
     background-color: salmon;
     max-width: 1000px;
-    margin: 0 auto;
-    margin-top: 30px;
+    margin: 30px auto;
     border-radius: 10px;
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.75);
     h1 {
@@ -25,6 +24,22 @@
         padding: 5px 10px;
         border-radius: 10px;
       }
+    }
+  }
+
+  .CommentsSection {
+    background-color: rgb(240, 239, 239);
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15);
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 15px;
+    h1 {
+      font-size: 19px;
+      margin: 0;
+      font-weight: 700;
+      border-bottom: 1px solid rgb(147, 144, 144);
+      text-transform: capitalize;
+      padding-bottom: 10px;
     }
   }
 }

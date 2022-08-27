@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
@@ -11,6 +11,12 @@ import buyerRouter from './routes/buyer.routes'
 import sellerRouter from './routes/seller.routes'
 
 dotenv.config()
+
+const app = express()
+
+app.use(cors())
+app.use(helmet())
+app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URI, {
   // @ts-ignore
@@ -33,33 +39,9 @@ connection.on('disconnected', () => {
   Logger.info('🔌 Mongoose default connection to DB disconnected')
 })
 
-const app = express()
-app.use(cors)
-app.use(helmet())
-
 app.use('/api/users', userRouter)
 app.use('/api/seller', sellerRouter)
 app.use('/api/buyer', buyerRouter)
-
-app.use(
-  (
-    error: { code: any; message: any },
-    _req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    Logger.info(`
-    [${new Date().toLocaleString()}] : ❌ Error`)
-    if (res.headersSent) {
-      return next(error)
-    }
-    if (res.headersSent) {
-      return
-    }
-    res.status(error.code || 500)
-    res.json({ message: error.message || 'An unknown error occurred!' })
-  }
-)
 
 const port = process.env.PORT || 3001
 app.listen(port, () => {

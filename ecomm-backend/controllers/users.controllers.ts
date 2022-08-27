@@ -3,8 +3,13 @@ import jwt from 'jsonwebtoken'
 import BuyerModel from '../models/buyers.model'
 import SellerModel from '../models/sellers.model'
 
+const test = (_req: Request, res: Response) => {
+  return res.status(200).json({ message: 'testing...' })
+}
+
 const register = async (req: Request, res: Response) => {
   const { type } = req.body
+  console.log('working...')
   if (!type) {
     return res.status(400).json({ message: 'Type is required' })
   } else if (['buyer', 'seller'].indexOf(type) === -1) {
@@ -18,6 +23,7 @@ const register = async (req: Request, res: Response) => {
 
     return res.status(201).json({ message: 'User created', user })
   } catch (err) {
+    console.log(err)
     return res.status(500).json({ message: err.message })
   }
 }
@@ -45,8 +51,9 @@ const login = async (req: Request, res: Response) => {
 
     return res.status(200).json({ message: 'User logged in', token })
   } catch (err) {
+    console.log(err)
     return res.status(500).json({ message: err.message })
   }
 }
 
-export { register, login }
+export { test, register, login }

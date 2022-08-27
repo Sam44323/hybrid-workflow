@@ -1,9 +1,10 @@
 import { Router } from 'express'
-import authMiddleware from '../utils/auth.middleware'
+import { register, login, test } from '../controllers/users.controllers'
 
 const usersRouter = Router()
 
-usersRouter.post('/login')
-usersRouter.post('/register')
+usersRouter.get('/test', test)
+usersRouter.post('/login', login)
+usersRouter.post('/register', register)
 
 export default usersRouter

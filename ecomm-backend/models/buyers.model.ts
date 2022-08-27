@@ -5,7 +5,7 @@ class Buyers {
   name: string
 
   @prop({ required: true, type: String })
-  orders: string
+  email: string
 }
 
 const BuyerModel = getModelForClass(Buyers)

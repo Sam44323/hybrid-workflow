@@ -8,15 +8,21 @@ const test = (_req: Request, res: Response) => {
 }
 
 const register = async (req: Request, res: Response) => {
-  const { type } = req.body
-  console.log('working...')
-  if (!type) {
-    return res.status(400).json({ message: 'Type is required' })
+  const { type, email, name } = req.body
+  if (!type || !email || !name) {
+    return res.status(400).json({ message: 'Payload incomplete...' })
   } else if (['buyer', 'seller'].indexOf(type) === -1) {
     return res.status(400).json({ message: 'Type is invalid' })
   }
   try {
     let user = null
+
+    if (type === 'buyer') user = await BuyerModel.findOne({ email })
+    else user = await SellerModel.findOne({ email })
+
+    if (user) {
+      return res.status(400).json({ message: 'User already exists' })
+    }
 
     if (type === 'buyer') user = await BuyerModel.create(req.body)
     else user = await SellerModel.create(req.body)
@@ -30,8 +36,8 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
   const { type, email, password } = req.body
-  if (!type) {
-    return res.status(400).json({ message: 'Type is required' })
+  if (!type || !email || !password) {
+    return res.status(400).json({ message: 'Payload incomplete...' })
   } else if (['buyer', 'seller'].indexOf(type) === -1) {
     return res.status(400).json({ message: 'Type is invalid' })
   }

@@ -29,9 +29,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  let data;
+  try {
+    data = await axios.get(`/items/${context.params!.articleId}`);
+  } catch (err) {
+    console.log(err);
+  }
   return {
     props: {
       articleId: context.params!.articleId,
+      data: data ? data.data : null,
     },
   };
 };

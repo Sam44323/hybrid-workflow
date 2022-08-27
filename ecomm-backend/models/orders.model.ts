@@ -8,7 +8,7 @@ class Order {
   @prop({ required: true, type: mongoose.Schema.Types.ObjectId })
   seller_id: mongoose.Schema.Types.ObjectId
 
-  @prop({ required: true, type: mongoose.Schema.Types.ObjectId, default: [] })
+  @prop({ required: true, type: Array<mongoose.Schema.Types.ObjectId>, default: [] })
   product_ids: mongoose.Schema.Types.ObjectId[]
 
   @prop({ required: true, type: Boolean })

@@ -40,7 +40,8 @@ const createCatalog = async (req: Request, res: Response) => {
 }
 
 const getOrders = async (req: Request, res: Response) => {
-  const { sellerId } = req.query
+  const { sellerId } = req.body
+
   if (!sellerId) {
     return res.status(400).json({ message: 'Payload incomplete...' })
   }

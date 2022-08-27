@@ -37,6 +37,10 @@ const app = express()
 app.use(cors)
 app.use(helmet())
 
+app.use('/api/users', userRouter)
+app.use('/api/products', productRouter)
+app.use('/api/orders', ordersRouter)
+
 app.use(
   (
     error: { code: any; message: any },

@@ -1,9 +1,9 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 
 import styles from "./Article.module.scss";
 import axios from "../../src/utils/axios";
-import Head from "next/head";
 
 const Article: NextPage = (props) => {
   console.log(props);

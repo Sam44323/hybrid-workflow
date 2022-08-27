@@ -5,6 +5,11 @@ import helmet from 'helmet'
 import mongoose from 'mongoose'
 import Logger from './utils/logger'
 
+// routes
+import userRouter from './routes/users.routes'
+import ordersRouter from './routes/orders.routes'
+import productRouter from './routes/products.routes'
+
 dotenv.config()
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -29,6 +34,8 @@ connection.on('disconnected', () => {
 })
 
 const app = express()
+app.use(cors)
+app.use(helmet())
 
 app.use(
   (

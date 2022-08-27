@@ -35,6 +35,10 @@
     grid-gap: 10px;
     flex-wrap: wrap;
     margin-top: 30px;
+    @media (max-width: 1200px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
     .Card {
       min-width: 380px;
       max-width: 380px;

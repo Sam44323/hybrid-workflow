@@ -7,8 +7,8 @@ import Logger from './utils/logger'
 
 // routes
 import userRouter from './routes/users.routes'
-import ordersRouter from './routes/orders.routes'
-import productRouter from './routes/products.routes'
+import buyerRouter from './routes/buyer.routes'
+import sellerRouter from './routes/seller.routes'
 
 dotenv.config()
 
@@ -38,8 +38,8 @@ app.use(cors)
 app.use(helmet())
 
 app.use('/api/users', userRouter)
-app.use('/api/products', productRouter)
-app.use('/api/orders', ordersRouter)
+app.use('/api/seller', sellerRouter)
+app.use('/api/buyer', buyerRouter)
 
 app.use(
   (

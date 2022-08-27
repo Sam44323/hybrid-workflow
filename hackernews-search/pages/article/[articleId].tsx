@@ -8,11 +8,13 @@ import axios from "../../src/utils/axios";
 
 const Article: NextPage = (props: any) => {
   const toast = useToast();
+  const [hasData, setHasData] = React.useState(false);
 
   console.log(props);
   React.useEffect(() => {
     if (props.articleId) {
       toast.closeAll();
+      setHasData(true);
     } else {
       toast({
         status: "success",
@@ -33,7 +35,12 @@ const Article: NextPage = (props: any) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.ArticleContainer}></div>
+      <div
+        className={styles.ArticleContainer}
+        style={{
+          display: hasData ? "block" : "none",
+        }}
+      ></div>
     </>
   );
 };

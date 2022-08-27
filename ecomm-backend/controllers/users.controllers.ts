@@ -25,7 +25,7 @@ const register = async (req: Request, res: Response) => {
     }
 
     if (type === 'buyer') user = await BuyerModel.create(req.body)
-    else user = await SellerModel.create(req.body)
+    else user = await SellerModel.create({ ...req.body, catalogue: [] })
 
     return res.status(201).json({ message: 'User created', user })
   } catch (err) {

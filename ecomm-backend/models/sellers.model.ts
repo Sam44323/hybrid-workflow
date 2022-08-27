@@ -6,9 +6,9 @@ class Sellers {
   name: string
 
   @prop({ required: true, type: String })
-  orders: string
+  email: string
 
-  @prop({ type: mongoose.Schema.Types.ObjectId, default: [] })
+  @prop({ type: Array<mongoose.Schema.Types.ObjectId>, default: [] })
   catalogue: mongoose.Schema.Types.ObjectId[]
 }
 

@@ -35,8 +35,8 @@ const register = async (req: Request, res: Response) => {
 }
 
 const login = async (req: Request, res: Response) => {
-  const { type, email, password } = req.body
-  if (!type || !email || !password) {
+  const { type, email, name } = req.body
+  if (!type || !email || !name) {
     return res.status(400).json({ message: 'Payload incomplete...' })
   } else if (['buyer', 'seller'].indexOf(type) === -1) {
     return res.status(400).json({ message: 'Type is invalid' })

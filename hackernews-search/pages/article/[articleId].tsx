@@ -1,8 +1,8 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { Spinner, useToast } from "@chakra-ui/react";
 import { Interweave } from "interweave";
+import { Spinner, useToast } from "@chakra-ui/react";
 
 import styles from "./Article.module.scss";
 import axios from "../../src/utils/axios";

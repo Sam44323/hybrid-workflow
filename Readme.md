@@ -9,7 +9,7 @@
 ![NodeJS](https://img.shields.io/badge/-NodeJS-333333?style=for-the-badge&logo=node.js&logoColor=61dbfb)
 ![MongoDB](https://img.shields.io/badge/-MongoDB-333333?style=for-the-badge&logo=mongodb&logoColor=61dbfb)
 
-**This repo contains the code for IMDB-API using OMDB API**
+**This repo contains the code for hybrid-flow using OMDB API**
 
 ---
 
